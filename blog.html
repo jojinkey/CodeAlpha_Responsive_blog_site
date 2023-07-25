@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body style="background-color: #f2f2f2;">
+    <header style="background-color: #333; padding: 20px; color: #fff;">
+        <h1 style="margin: 0;">Responsive Blog</h1>
+        <nav style="margin-top: 20px;">
+            <ul style="list-style: none; padding: 0;">
+                <li style="display: inline-block; margin-right: 10px;">
+                    <a href="{{ url_for('home') }}" style="color: #fff; text-decoration: none; transition: color 0.3s ease-in-out;">Home</a>
+                </li>
+                <li style="display: inline-block; margin-right: 10px;">
+                    <a href="{{ url_for('blog') }}" style="color: #fff; text-decoration: none; transition: color 0.3s ease-in-out;">Blog</a>
+                </li>
+                <li style="display: inline-block; margin-right: 10px;">
+                    <a href="{{ url_for('write') }}" style="color: #fff; text-decoration: none; transition: color 0.3s ease-in-out;">Write a Blog</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main style="max-width: 800px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+        <h2 style="font-size: 24px; margin-bottom: 20px; text-align: center;">Blog Posts</h2>
+        <div class="blog-posts">
+            {% for post in posts %}
+            <div class="blog-post" style="background-color: #f9f9f9; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); padding: 20px; margin-bottom: 20px;">
+                <h3 style="font-size: 20px; margin-bottom: 10px;">{{ post.title }}</h3>
+                <p style="margin-bottom: 10px;">{{ post.content }}</p>
+                <p style="margin-bottom: 10px;"><strong>Author:</strong> {{ post.author }}</p>
+                <p style="margin-bottom: 10px;"><strong>Date:</strong> {{ post.date }}</p>
+                <a href="{{ url_for('post', post_id=loop.index - 1) }}" style="color: #333; text-decoration: none;">Read More</a>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>
